@@ -10,7 +10,7 @@ Lab instruments, for example, are SMUs, Power Generator, Oscilloscope from diffe
 
 ## What are requirements to use python script to communicate with any Lab instrument?
 
-- refer to [1] (References)
+- refer to [1] (above)
 
 - 1. The lab instrument needs to have port supported by VISA: such as LAN, GPIB, USB.
 
@@ -22,4 +22,6 @@ Lab instruments, for example, are SMUs, Power Generator, Oscilloscope from diffe
 
   - 2.3 Search for instrument reference document to know what types of commands should be send through the pyvisa to communicate with the instrument.
 
-    - 2.3.1 For example, in case of Keithley 2602B SMU, the reference manual is in the [link](https://www.tek.com/en/keithley-source-measure-units/smu-2600b-series-sourcemeter-manual-8); or [their python library](https://pypi.org/project/keithley2600/), they say the **TSP** commands are used to communicate with their Keithley 2600B series instruments. That means we just copy paste the needed **TSP** commands in their reference manual into the pyvisa command to communicate (i.e using the instrument) through python script in the computer. 
+    - 2.3.1 For example, in case of Keithley 2602B SMU, the reference manual is in the [link](https://www.tek.com/en/keithley-source-measure-units/smu-2600b-series-sourcemeter-manual-8); or [their python library](https://pypi.org/project/keithley2600/), they say the **TSP** commands are used to communicate with their Keithley 2600B series instruments. That means we just copy paste the needed **TSP** commands in their reference manual into the pyvisa command to communicate (i.e using the instrument) through python script in the computer.
+
+    - 2.3.2 refer to [2] (above), **SCPI** command works for any instrument through the VISA driver. That means, besides **TSP** commands of Keithley 2600B series, **SCPI** could be used as an alternative. 
