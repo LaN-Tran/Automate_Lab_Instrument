@@ -16,9 +16,9 @@ Lab instruments, for example, are SMUs, Power Generator, Oscilloscope from diffe
 
 - 2. In the computer which runs the python script to interact with the instrument: 
 
-  - 2.1 Install VISA driver (free driver) from NI (National Instrument)
+  - 2.1 Install VISA driver (free driver) from NI (National Instrument) (a backend)
 
-  - 2.2 Install pyvisa package
+  - 2.2 Install pyvisa package (a library to communicate with backend)
 
   - 2.3 Search for instrument reference document to know what types of commands should be send through the pyvisa to communicate with the instrument.
 
