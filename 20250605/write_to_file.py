@@ -184,7 +184,53 @@ def keithely_actions_exp_1(keithley_instrument, stime, file_path, stop):
 
 
 
-        
+def mock_write_to_file(file_path, stop):
+    
+    field_names = ['time', 'va', 'vb']
+
+    stime = 1 # s
+
+    with open(file_path, 'w') as file:
+        file_writer = csv.DictWriter(file, fieldnames=field_names)
+        file_writer.writeheader()
+    
+        # start measurement
+    start_time = time.time()
+
+    while True:
+
+                with open(file_path, 'a') as file:
+
+                    file_writer = csv.DictWriter(file, fieldnames=field_names)
+
+                    value = 0.1 + np.random.rand()
+
+                    value2 = 0.5 + np.random.rand()
+
+                    time.sleep(stime)
+
+                    info = {
+                                'time': time.time() - start_time,
+                                'va': value,
+                                'vb': value2
+                            }
+                    
+                    file_writer.writerow(info)
+                    time.sleep(1)
+
+                    info = {
+                                'time': time.time() - start_time,
+                                'va': value,
+                                'vb': value2
+                            }
+                    
+                    logging.info(f"{'='*5}")
+                    file_writer.writerow(info)
+
+                if stop():
+                     break
+                
+     
 if __name__ == "__main__":
 
         # init logger
@@ -201,7 +247,7 @@ if __name__ == "__main__":
     logging.info("Main    : Prepare measurement")
     file_path = "C:/Users/20245580/LabCode/Automate_Lab_Instrument/20250605/output_exp2.csv"
     stop_keithley_write_threads = False
-    xw = threading.Thread(target=keithely_actions_exp_1 ,daemon= True, args=(k, 0.1, file_path, lambda: stop_keithley_write_threads))
+    xw = threading.Thread(target=mock_write_to_file,daemon= True, args=(file_path, lambda: stop_keithley_write_threads))
 
     logging.info("Main    : Run measurement")
     xw.start()

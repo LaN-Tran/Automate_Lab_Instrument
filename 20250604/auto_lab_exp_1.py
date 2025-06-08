@@ -315,7 +315,7 @@ if __name__ == "__main__":
 
     stime = 1 
     
-    file_path = "C:/Users/20245580/LabCode/Automate_Lab_Instrument/20250603/output_exp1.csv"
+    file_path = "C:/Users/20245580/LabCode/Automate_Lab_Instrument/20250604/output_exp1.csv"
 
     logging.info("Main    : Prepare measurement")
 
