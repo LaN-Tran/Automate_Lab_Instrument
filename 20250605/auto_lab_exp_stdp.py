@@ -13,6 +13,8 @@
     [2] [closing event of matplotlib window](https://matplotlib.org/stable/gallery/event_handling/close_event.html)
 
     [3] [python timer to track time](https://stackoverflow.com/questions/70058132/how-do-i-make-a-timer-in-python)
+
+    [4] [Idea for relay board connection](https://forum.arduino.cc/t/help-on-my-electronic-project-deployment/1112089)
 """
 
 # Libs
@@ -160,18 +162,19 @@ def keithely_actions_exp_2(keithley_instrument, arduino_board, file_path, stop):
 
         # pulsewidth of the pre-synapse or post-synpse >> 24 ms (due to limit of the communication = code)
 
-    settle_time = 1000e-3 # s # after the smu configuration
+    settle_time = 2 # s # after the smu configuration
     
-    sw_settle_time = 500e-3 # s
-    read_duration = sw_settle_time + 1 # s # >> 20 ms (forth and back with the smu) + sw_settle_time
-    write_duration = sw_settle_time * 3 # s # > sw_settle_time
+    sw_settle_time = 0.1 # s
+    wait_till_read = 0.4 # s
+    read_duration = sw_settle_time + wait_till_read + 0.3 # s # >> 20 ms (forth and back with the smu) + sw_settle_time
+    write_duration = sw_settle_time  # s # > sw_settle_time
     between_read_and_write = 1 # s
-    retention_duration = 1 # s
+    retention_duration = 3 # s
 
         # voltage configure
-    gate_voltage = 0.05 # -0.1
-    drain_voltage_write = -0.5
-    drain_voltage_read = -0.5
+    gate_voltage = 0
+    drain_voltage_write = 0.2
+    drain_voltage_read = -0.1
 
         # arduino bin
     arduino_bin_mux_z = 10 # (sw control, High = Off/ Low = On)
@@ -294,6 +297,7 @@ def keithely_actions_exp_2(keithley_instrument, arduino_board, file_path, stop):
 
                     start_read_time = time.time()
                     try:
+                        time.sleep(wait_till_read)
                         measured_i_channel = keithley_instrument.smua.measure.i()
                         end_read_time = time.time()
                         time.sleep(read_duration - sw_settle_time - (end_read_time - start_read_time))
@@ -377,7 +381,7 @@ def transfer_curve(keithley_instrument, arduino_board, file_path, stop):
     gate_voltage_smallest = -0.5 # V (for liquid electrolite)
     gate_voltage_largest = 0.5 # V (for liquid electrolite)
     gate_voltage_step = 0.1 # V
-    drain_voltage = -0.5 # V
+    drain_voltage = -0.1 # V
 
         # arduino bin
             # Y0 = read phase (only control gate, drain)
@@ -856,11 +860,11 @@ if __name__ == "__main__":
     # # ======
     # For the relay board: HIGH = OFF = OPEN // LOW = ON = CLOSE
     board.digital[arduino_bin_mux_enable].write(1)
-
+    time.sleep(1)
         # path to the measurement record
     # file_path = "C:/Users/20245580/LabCode/Automate_Lab_Instrument/20250605/output_exp3.csv"
     # file_path = "C:/Users/20245580/LabCode/Automate_Lab_Instrument/20250605/output_exp_ecram.csv"
-    file_path = "C:/Users/20245580/LabCode/Automate_Lab_Instrument/20250605/output_exp_ecram_p.csv"
+    file_path = "C:/Users/20245580/LabCode/Automate_Lab_Instrument/exp_data/20250610/ecram_16.csv"
 
     logging.info("Main    : Prepare measurement")
 
