@@ -27,3 +27,5 @@ Lab instruments, for example, are SMUs, Power Generator, Oscilloscope from diffe
     - 2.3.2 refer to [2] (above), **SCPI** command works for any instrument through the VISA driver. That means, besides **TSP** commands of Keithley 2600B series, **SCPI** could be used as an alternative. 
 
       - upload `.tsp` script to Keithley SMU through python visa: https://www.tek.com/de/documents/application-note/harness-the-power-of-tsp-toolkit-software - see **Application Example**
+
+      - managing scripts loaded in the Keithley SMU: **2600BS-901-01F_2600B_Reference_Aug2021.pdf- section: Create and load a script**
