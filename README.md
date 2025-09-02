@@ -25,3 +25,5 @@ Lab instruments, for example, are SMUs, Power Generator, Oscilloscope from diffe
     - 2.3.1 For example, in case of Keithley 2602B SMU, the reference manual is in the [link](https://www.tek.com/en/keithley-source-measure-units/smu-2600b-series-sourcemeter-manual-8); or [their python library](https://pypi.org/project/keithley2600/), they say the **TSP** commands are used to communicate with their Keithley 2600B series instruments. That means we just copy paste the needed **TSP** commands in their reference manual into the pyvisa command to communicate (i.e using the instrument) through python script in the computer.
 
     - 2.3.2 refer to [2] (above), **SCPI** command works for any instrument through the VISA driver. That means, besides **TSP** commands of Keithley 2600B series, **SCPI** could be used as an alternative. 
+
+      - upload `.tsp` script to Keithley SMU through python visa: https://www.tek.com/de/documents/application-note/harness-the-power-of-tsp-toolkit-software - see **Application Example**
