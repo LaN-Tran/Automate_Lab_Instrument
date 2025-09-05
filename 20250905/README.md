@@ -1,0 +1,1 @@
+- TSP toolkit extension also helps highlighting and auto-complete the tsp language syntax
